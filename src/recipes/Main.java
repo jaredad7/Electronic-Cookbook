@@ -26,7 +26,9 @@ public class Main
 	
 	//Create the frame components
 	private static final JTextField titleField = new JTextField(30);
-	private static final JButton search = new JButton("Search");
+	private static final JTextField category = new JTextField(30);
+	private static final JButton searchByCategory = new JButton("Serach by Category");
+	private static final JButton searchByTitle = new JButton("Search by Title");
 	private static final JButton save =  new JButton("Save");
 	private static final JButton delete =  new JButton("Delete");
 	private static final JTextArea ingredientsField = new JTextArea(10, 80);
@@ -49,6 +51,7 @@ public class Main
 		titleField.setText(rec.getTitle());
 		ingredientsField.setText(rec.getIngredients());
 		instructionsField.setText(rec.getInstructions());
+		category.setText(rec.getCategory());
 		
 		//Add ActionListeners for buttons
 		addSearch();
@@ -70,9 +73,11 @@ public class Main
 		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new FlowLayout());
 		frame.add(titleField);
-		frame.add(search);
+		frame.add(searchByTitle);
 		frame.add(save);
 		frame.add(delete);
+		frame.add(category);
+		frame.add(searchByCategory);
 		frame.add(scrollPane1);
 		frame.add(scrollPane2);
 		
@@ -86,7 +91,7 @@ public class Main
 	//Search functionality
 	private static void addSearch()
 	{
-		search.addActionListener(new ActionListener()
+		searchByTitle.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
@@ -102,6 +107,7 @@ public class Main
 					}
 					ingredientsField.setText(titleDisplay);
 					instructionsField.setText("");
+					category.setText("");
 				}
 				else
 				{
@@ -109,6 +115,7 @@ public class Main
 					titleField.setText(r.getTitle());
 					ingredientsField.setText(r.getIngredients());
 					instructionsField.setText(r.getInstructions());
+					category.setText(r.getCategory());
 				}
 			}
 			
@@ -126,7 +133,7 @@ public class Main
 			{
 				//Save Recipe to cookbook
 				cookbook.addRecipe(titleField.getText(), ingredientsField.getText(),
-						instructionsField.getText());
+						instructionsField.getText(), category.getText());
 				
 				//Write cookbook to disk as .sav file
 				try 

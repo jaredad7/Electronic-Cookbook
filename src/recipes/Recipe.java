@@ -11,12 +11,14 @@ public class Recipe implements Serializable
 	private String title;
 	private String ingredients;
 	private String instructions;
+	private String category;
 
-	public Recipe(String t, String ingred, String instruct) 
+	public Recipe(String title, String ingredients, String instructions, String category) 
 	{
-		title = t;
-		ingredients = ingred;
-		instructions = instruct;
+		this.title = title;
+		this.ingredients = ingredients;
+		this.instructions = instructions;
+		this.category = category;
 	}
 
 	//Get recipe components
@@ -32,6 +34,10 @@ public class Recipe implements Serializable
 	{
 		return instructions;
 	}
+	public String getCategory()
+	{
+		return category;
+	}
 	
 	//Set ingredients and instructions to new strings
 	public void setIngredients(String i)
@@ -41,6 +47,10 @@ public class Recipe implements Serializable
 	public void setInstructions(String i)
 	{
 		instructions = i;
+	}
+	public void setCategory(String c)
+	{
+		category = c;
 	}
 
 }

@@ -17,15 +17,16 @@ public class Cookbook implements Serializable
 	private String sample_title = "Recipe Title Here";
 	private String sample_ingredients = "Recipe Ingredients Here  (No two recipes can have the same title)";
 	private String sample_instructions = "Recipe Instructions Here (Click 'Search' with no title to display available recipes)";
+	private String sample_category = "Category";
 	
 	public Cookbook()
 	{
 		book = new ArrayList<Recipe>();
-		book.add(new Recipe(sample_title, sample_ingredients, sample_instructions));
+		book.add(new Recipe(sample_title, sample_ingredients, sample_instructions, sample_category));
 	}
 	
 	//Adds a new recipe to the cookbook, or overwrites the old one
-	public void addRecipe(String title, String ingredients, String instructions)
+	public void addRecipe(String title, String ingredients, String instructions, String category)
 	{
 		boolean isThere = false;
 		//Check if the recipe title already exists
@@ -36,6 +37,7 @@ public class Cookbook implements Serializable
 				//Overwrite the recipe and exit the loop
 				recipe.setIngredients(ingredients);
 				recipe.setInstructions(instructions);
+				recipe.setCategory(category);
 				isThere = true;
 				break;
 			}
@@ -44,7 +46,7 @@ public class Cookbook implements Serializable
 		//If the recipe does not yet exist
 		if(!isThere)
 		{
-			book.add(new Recipe(title, ingredients, instructions));
+			book.add(new Recipe(title, ingredients, instructions, category));
 		}
 	}
 	
@@ -73,7 +75,7 @@ public class Cookbook implements Serializable
 		}
 		//System.out.println(book.get(0).getTitle());
 		//System.out.println(title);
-		return new Recipe(title, "No such Recipe", "No such Recipe");
+		return new Recipe(title, "No such Recipe", "No such Recipe", "");
 	}
 	
 	//Get a list of all of the recipes available by title
