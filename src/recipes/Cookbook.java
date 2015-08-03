@@ -78,6 +78,20 @@ public class Cookbook implements Serializable
 		return new Recipe(title, "No such Recipe", "No such Recipe", "");
 	}
 	
+	//Return a recipe by title
+	public ArrayList<Recipe> getRecipesByCategory(String category)
+	{
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		for(Recipe recipe : book)
+		{
+			if(category.equals(recipe.getCategory()))
+			{
+				recipes.add(recipe);
+			}
+		}
+		return recipes;
+	}
+	
 	//Get a list of all of the recipes available by title
 	public ArrayList<String> getRecipeTitles()
 	{
@@ -87,6 +101,20 @@ public class Cookbook implements Serializable
 			titles.add(recipe.getTitle());
 		}
 		return titles;
+	}
+	
+	//Get a list of all the categories used in the cookbook
+	public ArrayList<String> getCategories()
+	{
+		ArrayList<String> categories = new ArrayList<String>();
+		for(Recipe recipe : book)
+		{
+			if(!categories.contains(recipe.getCategory()))
+			{
+				categories.add(recipe.getCategory());
+			}
+		}
+		return categories;
 	}
 	
 }

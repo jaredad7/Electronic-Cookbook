@@ -54,7 +54,8 @@ public class Main
 		category.setText(rec.getCategory());
 		
 		//Add ActionListeners for buttons
-		addSearch();
+		addSearchByTitle();
+		addSearchByCategory();
 		addSave();
 		addDelete();
 	}
@@ -88,8 +89,8 @@ public class Main
 		frame.setVisible(true);
 	}
 
-	//Search functionality
-	private static void addSearch()
+	//Search by Title functionality
+	private static void addSearchByTitle()
 	{
 		searchByTitle.addActionListener(new ActionListener()
 		{
@@ -116,6 +117,49 @@ public class Main
 					ingredientsField.setText(r.getIngredients());
 					instructionsField.setText(r.getInstructions());
 					category.setText(r.getCategory());
+				}
+			}
+			
+		});
+	}
+	
+	//Search by Category functionality
+	private static void addSearchByCategory()
+	{
+		searchByCategory.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String cat = category.getText();
+				if(cat.equals(""))
+				{
+					ArrayList<String> categories = cookbook.getCategories();
+					String categoryDisplay = "Available categories: ";
+					for(String s : categories)
+					{
+						categoryDisplay += (s + ", ");
+					}
+					ingredientsField.setText(categoryDisplay);
+					instructionsField.setText("");
+					category.setText("");
+				}
+				else
+				{
+					ArrayList<Recipe> recipes = cookbook.getRecipesByCategory(category.getText());
+					String categoryDisplay = "Recipes in category " + category.getText() + ": ";
+					for(Recipe r : recipes)
+					{
+						categoryDisplay += (r.getTitle() + ", ");
+					}
+					//Warning if empty
+					if(recipes.isEmpty())
+					{
+						categoryDisplay += "none";
+					}
+					ingredientsField.setText(categoryDisplay);
+					instructionsField.setText("");
+					category.setText("");
 				}
 			}
 			
