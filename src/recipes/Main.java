@@ -182,6 +182,7 @@ public class Main
 			try 
 			{
 				FileInputStream fis = new FileInputStream(book);
+				@SuppressWarnings("resource")
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				cookbook = (Cookbook) ois.readObject();
 			} catch (Exception e1) 

@@ -2,10 +2,14 @@ package recipes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 //An array of recipes
 public class Cookbook implements Serializable 
 {
+	//Serial version id
+	private static final long serialVersionUID = 3503104156271192469L;
+
 	//An array of Recipes interfaced with via the Cookbook class
 	private ArrayList<Recipe> book;
 	
@@ -16,7 +20,7 @@ public class Cookbook implements Serializable
 	
 	public Cookbook()
 	{
-		book = new ArrayList();
+		book = new ArrayList<Recipe>();
 		book.add(new Recipe(sample_title, sample_ingredients, sample_instructions));
 	}
 	
@@ -25,13 +29,13 @@ public class Cookbook implements Serializable
 	{
 		boolean isThere = false;
 		//Check if the recipe title already exists
-		for(int i = 0; i < book.size(); i++)
+		for(Recipe recipe : book)
 		{
-			if(title.equals(book.get(i).getTitle()))
+			if(title.equals(recipe.getTitle()))
 			{
 				//Overwrite the recipe and exit the loop
-				book.get(i).setIngredients(ingredients);
-				book.get(i).setInstructions(instructions);
+				recipe.setIngredients(ingredients);
+				recipe.setInstructions(instructions);
 				isThere = true;
 				break;
 			}
@@ -47,11 +51,12 @@ public class Cookbook implements Serializable
 	//Delete a recipe from the cookbook
 	public void delRecipe(String title)
 	{
-		for(int i = 0; i < book.size(); i++)
+		Iterator<Recipe> iterator = book.iterator();
+		while(iterator.hasNext())
 		{
-			if(title.equals(book.get(i).getTitle()))
+			if(title.equals(iterator.next().getTitle()))
 			{
-				book.remove(i);
+				iterator.remove();
 			}
 		}
 	}
@@ -59,11 +64,11 @@ public class Cookbook implements Serializable
 	//Return a recipe by title
 	public Recipe getRecipe(String title)
 	{
-		for(int i = 0; i < book.size(); i++)
+		for(Recipe recipe : book)
 		{
-			if(title.equals(book.get(i).getTitle()))
+			if(title.equals(recipe.getTitle()))
 			{
-				return book.get(i);
+				return recipe;
 			}
 		}
 		//System.out.println(book.get(0).getTitle());
@@ -74,10 +79,10 @@ public class Cookbook implements Serializable
 	//Get a list of all of the recipes available by title
 	public ArrayList<String> getRecipeTitles()
 	{
-		ArrayList<String> titles = new ArrayList();
-		for(int i = 0; i < book.size(); i++)
+		ArrayList<String> titles = new ArrayList<String>();
+		for(Recipe recipe : book)
 		{
-			titles.add(book.get(i).getTitle());
+			titles.add(recipe.getTitle());
 		}
 		return titles;
 	}

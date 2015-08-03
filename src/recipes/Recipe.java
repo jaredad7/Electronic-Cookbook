@@ -5,6 +5,9 @@ import java.io.Serializable;
 //A single recipe in a cookbook
 public class Recipe implements Serializable
 {
+	//Serial version id
+	private static final long serialVersionUID = 2174540422411710151L;
+	
 	private String title;
 	private String ingredients;
 	private String instructions;
